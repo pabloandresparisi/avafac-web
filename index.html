@@ -87,6 +87,43 @@
   .afip h2{color:#fff}
   .afip .titulo p{color:#d6e6f2}
 
+  /* Rubros */
+  .rubros{background:var(--gris)}
+  .rubros-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:900px){.rubros-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.rubros-grid{grid-template-columns:1fr}}
+  .rubro{background:#fff;border:1px solid #e6ebf0;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:.25s}
+  .rubro:hover{transform:translateY(-3px);box-shadow:var(--sombra);border-color:transparent}
+  .rubro .r-ico{font-size:1.8rem;line-height:1}
+  .rubro h4{color:var(--azul);font-size:1.05rem;margin-bottom:3px}
+  .rubro p{color:var(--txt2);font-size:.9rem}
+
+  /* Mockup POS */
+  .pos{display:grid;grid-template-columns:1fr 1.15fr;border-radius:16px;overflow:hidden;box-shadow:var(--sombra);background:#fff;border:1px solid #e6ebf0;max-width:840px;margin:0 auto}
+  @media(max-width:680px){.pos{grid-template-columns:1fr}}
+  .pos-ticket{background:#0d2c44;color:#dce8f2;padding:22px}
+  .pos-ticket h5{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:#7dd3fc;margin-bottom:14px}
+  .pos-line{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.92rem}
+  .pos-line small{opacity:.55}
+  .pos-total{display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:2px solid rgba(255,255,255,.2);font-weight:800;font-size:1.35rem;color:#fff}
+  .pos-pay{margin-top:16px;background:var(--acento);color:#fff;text-align:center;padding:12px;border-radius:10px;font-weight:700}
+  .pos-pad{padding:22px;background:#f8fafc}
+  .pos-dept{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .pos-dept span{background:#e7f3ff;color:var(--azul2);font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:50px}
+  .pos-dept span.on{background:var(--azul2);color:#fff}
+  .pos-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .pos-btns b{background:#fff;border:1px solid #dbe4ec;border-radius:10px;padding:13px 6px;text-align:center;font-size:.78rem;font-weight:600;color:var(--txt);box-shadow:0 2px 5px rgba(0,0,0,.04);line-height:1.35}
+
+  /* FAQ */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .faq-list details{background:#fff;border:1px solid #e6ebf0;border-radius:12px;padding:0 22px;transition:.2s}
+  .faq-list details[open]{box-shadow:var(--sombra);border-color:transparent}
+  .faq-list summary{cursor:pointer;padding:18px 0;font-weight:700;color:var(--azul);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:1rem}
+  .faq-list summary::-webkit-details-marker{display:none}
+  .faq-list summary::after{content:"+";font-size:1.5rem;color:var(--acento);font-weight:700;line-height:1}
+  .faq-list details[open] summary::after{content:"\2013"}
+  .faq-list p{color:var(--txt2);font-size:.95rem;padding:0 0 18px}
+
   /* CTA final */
   .cta-final{text-align:center;padding:80px 0}
   .cta-final h2{font-size:2.2rem;color:var(--azul);font-weight:800;margin-bottom:14px}
@@ -103,8 +140,10 @@
     <div class="logo">ava<span>FAC</span></div>
     <nav class="nav-links">
       <a href="#funciones">Funciones</a>
+      <a href="#rubros">Rubros</a>
       <a href="#salon">Salón / Mesas</a>
       <a href="#afip">AFIP</a>
+      <a href="#faq">FAQ</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" class="btn">Pedir demo</a>
@@ -244,6 +283,55 @@
   </div>
 </section>
 
+<!-- RUBROS -->
+<section id="rubros" class="rubros">
+  <div class="wrap">
+    <div class="titulo">
+      <div class="k">Un sistema, muchos rubros</div>
+      <h2>Pensado para tu tipo de negocio</h2>
+      <p>avaFAC se adapta a comercios y servicios: activás el modo que necesitás y el sistema trabaja a la medida de tu negocio.</p>
+    </div>
+    <div class="rubros-grid">
+      <div class="rubro"><div class="r-ico">🍽️</div><div><h4>Bares y restaurantes</h4><p>Mesas, plano de salón, comandas a cocina y división de cuenta.</p></div></div>
+      <div class="rubro"><div class="r-ico">🏪</div><div><h4>Kioscos y autoservicios</h4><p>Venta rápida por código de barras y cobro ágil en el mostrador.</p></div></div>
+      <div class="rubro"><div class="r-ico">🔧</div><div><h4>Ferreterías y comercios</h4><p>Miles de artículos, control de stock y cuenta corriente de clientes.</p></div></div>
+      <div class="rubro"><div class="r-ico">🏓</div><div><h4>Canchas de pádel</h4><p>Identificá cada cancha por nombre y reservala a nombre del cliente.</p></div></div>
+      <div class="rubro"><div class="r-ico">👕</div><div><h4>Indumentaria y librerías</h4><p>Categorías, rubros y precios claros para el retail de todos los días.</p></div></div>
+      <div class="rubro"><div class="r-ico">🧺</div><div><h4>Lavanderías y servicios</h4><p>Órdenes de trabajo por ítem y seguimiento del comprobante.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOCKUP POS -->
+<section id="pantallas">
+  <div class="wrap">
+    <div class="titulo">
+      <div class="k">Así se ve</div>
+      <h2>La venta rápida, en una sola pantalla</h2>
+      <p>Los botones de productos por departamento a un lado y el ticket con el total siempre a la vista. Cobrás en dos toques.</p>
+    </div>
+    <div class="pos">
+      <div class="pos-ticket">
+        <h5>Ticket · Mesa 4</h5>
+        <div class="pos-line"><span>2 · Café con leche</span><span>$3.600</span></div>
+        <div class="pos-line"><span>1 · Medialunas <small>x3</small></span><span>$2.400</span></div>
+        <div class="pos-line"><span>2 · Agua saborizada</span><span>$3.000</span></div>
+        <div class="pos-line"><span>1 · Tostado J&amp;Q</span><span>$4.200</span></div>
+        <div class="pos-total"><span>Total</span><span>$13.200</span></div>
+        <div class="pos-pay">💳 Cobrar</div>
+      </div>
+      <div class="pos-pad">
+        <div class="pos-dept"><span class="on">Cafetería</span><span>Bebidas</span><span>Panadería</span><span>Sándwiches</span></div>
+        <div class="pos-btns">
+          <b>Café<br>$1.800</b><b>Cortado<br>$1.700</b><b>Capuchino<br>$2.100</b>
+          <b>Té<br>$1.500</b><b>Submarino<br>$2.400</b><b>Licuado<br>$3.200</b>
+          <b>Medialuna<br>$800</b><b>Tostado<br>$4.200</b><b>Factura<br>$900</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SALÓN / MESAS -->
 <section id="salon" class="salon">
   <div class="wrap salon-flex">
@@ -307,6 +395,42 @@
         <h3 style="color:#fff">Consolidación con ARCA</h3>
         <p style="color:#d6e6f2">Cotejá tus comprobantes locales contra los registrados en ARCA para detectar diferencias y mantener todo conciliado.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="rubros">
+  <div class="wrap">
+    <div class="titulo">
+      <div class="k">Preguntas frecuentes</div>
+      <h2>Lo que más nos consultan</h2>
+    </div>
+    <div class="faq-list">
+      <details open>
+        <summary>¿Está integrado con AFIP / ARCA?</summary>
+        <p>Sí. avaFAC emite facturas A, B y C con CAE en línea contra los web services de ARCA (ex AFIP), y gestiona el ticket de acceso, el punto de venta y la numeración por vos. Si todavía no facturás electrónicamente, podés trabajar con comprobantes no fiscales.</p>
+      </details>
+      <details>
+        <summary>¿Sirve para mi rubro?</summary>
+        <p>avaFAC es multi-rubro: gastronomía (bares y restaurantes), kioscos, autoservicios, ferreterías, indumentaria, librerías, canchas de pádel, lavanderías y más. Activás el modo que necesitás y el sistema se comporta a la medida de tu negocio.</p>
+      </details>
+      <details>
+        <summary>¿Funciona en red con varias cajas?</summary>
+        <p>Sí. Podés trabajar en una sola terminal o en red con varias cajas operando a la vez sobre la misma base de datos, cada una con su turno de caja y su arqueo.</p>
+      </details>
+      <details>
+        <summary>¿Necesito hardware especial?</summary>
+        <p>Funciona en una PC con Windows y es compatible con impresoras térmicas, lectores de código de barras y los periféricos habituales del punto de venta. También podés operar la venta rápida desde una tablet en modo táctil.</p>
+      </details>
+      <details>
+        <summary>¿Puedo controlar el stock y los clientes?</summary>
+        <p>Sí. Incluye control de stock con kardex y trazabilidad de cada movimiento, cuenta corriente de clientes con saldo a favor, y reportes de ventas y comprobantes listos para imprimir.</p>
+      </details>
+      <details>
+        <summary>¿Cómo empiezo?</summary>
+        <p>Escribinos por WhatsApp y coordinamos una demo en tu propio negocio, sin compromiso. Te ayudamos a ponerlo en marcha.</p>
+      </details>
     </div>
   </div>
 </section>
