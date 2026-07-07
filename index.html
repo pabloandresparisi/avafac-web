@@ -4,279 +4,197 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>avaFAC — Facturación y Punto de Venta para tu comercio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --azul:#124b73; --azul2:#1e6fa8; --acento:#16a34a; --naranja:#ea7317;
-    --gris:#f4f6f8; --txt:#1f2933; --txt2:#52606d; --blanco:#ffffff;
-    --sombra:0 8px 30px rgba(18,75,115,.10);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--txt);line-height:1.6;background:var(--blanco)}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
-  a{text-decoration:none;color:inherit}
-
-  /* Header */
-  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e4e9ee}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{font-weight:800;font-size:1.5rem;color:var(--azul);letter-spacing:-.5px}
-  .logo span{color:var(--acento)}
-  .nav-links{display:flex;gap:26px;font-weight:600;font-size:.95rem}
-  .nav-links a{color:var(--txt2)}
-  .nav-links a:hover{color:var(--azul)}
-  .btn{display:inline-block;background:var(--acento);color:#fff;padding:12px 26px;border-radius:10px;font-weight:700;transition:.2s;border:none;cursor:pointer}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(22,163,74,.35)}
-  .btn-outline{background:transparent;color:var(--azul);border:2px solid var(--azul)}
-  .btn-outline:hover{background:var(--azul);color:#fff;box-shadow:none}
-  @media(max-width:760px){.nav-links{display:none}}
-
-  /* Hero */
-  .hero{background:linear-gradient(135deg,var(--azul) 0%,var(--azul2) 100%);color:#fff;padding:80px 0 90px;position:relative;overflow:hidden}
-  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;background:rgba(255,255,255,.06);border-radius:50%}
-  .hero h1{font-size:2.9rem;font-weight:800;line-height:1.15;letter-spacing:-1px;max-width:680px}
-  .hero p{font-size:1.2rem;opacity:.92;margin:22px 0 34px;max-width:620px}
-  .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
-  .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);padding:7px 16px;border-radius:50px;font-size:.85rem;font-weight:600;margin-bottom:22px}
-  .badge .dot{width:8px;height:8px;background:#4ade80;border-radius:50%}
-  @media(max-width:760px){.hero h1{font-size:2.1rem}.hero p{font-size:1.05rem}}
-
-  /* Tira de confianza */
-  .tira{background:var(--gris);padding:26px 0}
-  .tira .wrap{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;text-align:center}
-  .tira .item{flex:1;min-width:150px}
-  .tira .num{font-size:1.7rem;font-weight:800;color:var(--azul)}
-  .tira .lbl{font-size:.9rem;color:var(--txt2)}
-
-  /* Secciones */
-  section{padding:72px 0}
-  .titulo{text-align:center;max-width:680px;margin:0 auto 48px}
-  .titulo .k{color:var(--acento);font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:.85rem}
-  .titulo h2{font-size:2.1rem;font-weight:800;color:var(--azul);margin:8px 0 14px;letter-spacing:-.5px}
-  .titulo p{color:var(--txt2);font-size:1.08rem}
-
-  /* Grid de features */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.grid{grid-template-columns:1fr}}
-  .card{background:#fff;border:1px solid #e6ebf0;border-radius:16px;padding:28px;transition:.25s}
-  .card:hover{transform:translateY(-4px);box-shadow:var(--sombra);border-color:transparent}
-  .ico{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:16px;background:#e7f3ff}
-  .card h3{font-size:1.15rem;color:var(--azul);margin-bottom:8px}
-  .card p{color:var(--txt2);font-size:.97rem}
-
-  /* Destacado salón */
-  .salon{background:var(--gris)}
-  .salon-flex{display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center}
-  @media(max-width:820px){.salon-flex{grid-template-columns:1fr;gap:32px}}
-  .salon ul{list-style:none;margin-top:18px}
-  .salon li{padding:9px 0 9px 34px;position:relative;color:var(--txt2)}
-  .salon li::before{content:"✓";position:absolute;left:0;top:9px;width:22px;height:22px;background:var(--acento);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700}
-  /* mockup de mesas */
-  .mesas{background:#fff;border-radius:18px;padding:22px;box-shadow:var(--sombra)}
-  .mesas h4{color:var(--azul);font-size:.95rem;margin-bottom:14px;text-align:center}
-  .mesas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .mesa{border-radius:10px;padding:18px 8px;text-align:center;color:#fff;font-weight:700;font-size:.9rem;box-shadow:0 3px 8px rgba(0,0,0,.08)}
-  .mesa small{display:block;font-weight:500;opacity:.9;font-size:.7rem;margin-top:3px}
-  .libre{background:#3cb371}.ocupada{background:#cd5c5c}.reservada{background:#e8890c}
-  .leyenda{display:flex;gap:16px;justify-content:center;margin-top:16px;font-size:.78rem;color:var(--txt2);flex-wrap:wrap}
-  .leyenda span{display:flex;align-items:center;gap:6px}
-  .leyenda i{width:12px;height:12px;border-radius:3px;display:inline-block}
-
-  /* Franja AFIP */
-  .afip{background:linear-gradient(135deg,#0d3a59,#155a87);color:#fff;text-align:center}
-  .afip h2{color:#fff}
-  .afip .titulo p{color:#d6e6f2}
-
-  /* Rubros */
-  .rubros{background:var(--gris)}
-  .rubros-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media(max-width:900px){.rubros-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.rubros-grid{grid-template-columns:1fr}}
-  .rubro{background:#fff;border:1px solid #e6ebf0;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:.25s}
-  .rubro:hover{transform:translateY(-3px);box-shadow:var(--sombra);border-color:transparent}
-  .rubro .r-ico{font-size:1.8rem;line-height:1}
-  .rubro h4{color:var(--azul);font-size:1.05rem;margin-bottom:3px}
-  .rubro p{color:var(--txt2);font-size:.9rem}
-
-  /* Mockup POS */
-  .pos{display:grid;grid-template-columns:1fr 1.15fr;border-radius:16px;overflow:hidden;box-shadow:var(--sombra);background:#fff;border:1px solid #e6ebf0;max-width:840px;margin:0 auto}
-  @media(max-width:680px){.pos{grid-template-columns:1fr}}
-  .pos-ticket{background:#0d2c44;color:#dce8f2;padding:22px}
-  .pos-ticket h5{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:#7dd3fc;margin-bottom:14px}
-  .pos-line{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.92rem}
-  .pos-line small{opacity:.55}
-  .pos-total{display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:2px solid rgba(255,255,255,.2);font-weight:800;font-size:1.35rem;color:#fff}
-  .pos-pay{margin-top:16px;background:var(--acento);color:#fff;text-align:center;padding:12px;border-radius:10px;font-weight:700}
-  .pos-pad{padding:22px;background:#f8fafc}
-  .pos-dept{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-  .pos-dept span{background:#e7f3ff;color:var(--azul2);font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:50px}
-  .pos-dept span.on{background:var(--azul2);color:#fff}
-  .pos-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .pos-btns b{background:#fff;border:1px solid #dbe4ec;border-radius:10px;padding:13px 6px;text-align:center;font-size:.78rem;font-weight:600;color:var(--txt);box-shadow:0 2px 5px rgba(0,0,0,.04);line-height:1.35}
-
-  /* FAQ */
-  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-  .faq-list details{background:#fff;border:1px solid #e6ebf0;border-radius:12px;padding:0 22px;transition:.2s}
-  .faq-list details[open]{box-shadow:var(--sombra);border-color:transparent}
-  .faq-list summary{cursor:pointer;padding:18px 0;font-weight:700;color:var(--azul);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:1rem}
-  .faq-list summary::-webkit-details-marker{display:none}
-  .faq-list summary::after{content:"+";font-size:1.5rem;color:var(--acento);font-weight:700;line-height:1}
-  .faq-list details[open] summary::after{content:"\2013"}
-  .faq-list p{color:var(--txt2);font-size:.95rem;padding:0 0 18px}
-
-  /* CTA final */
-  .cta-final{text-align:center;padding:80px 0}
-  .cta-final h2{font-size:2.2rem;color:var(--azul);font-weight:800;margin-bottom:14px}
-  .cta-final p{color:var(--txt2);font-size:1.1rem;margin-bottom:30px}
-
-  footer{background:#0d2c44;color:#9fb3c4;padding:40px 0;text-align:center;font-size:.9rem}
-  footer .logo{color:#fff;margin-bottom:10px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',system-ui,sans-serif;color:#0a2540;background:#fff;-webkit-font-smoothing:antialiased;line-height:1.6}
+    a{text-decoration:none;color:inherit}a:hover{color:inherit}
+    @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+    details summary{list-style:none;cursor:pointer}
+    details summary::-webkit-details-marker{display:none}
+    @media(max-width:960px){.hg{grid-template-columns:1fr!important}.hp{display:none!important}.fg,.rg,.ag{grid-template-columns:repeat(2,1fr)!important}.sg{grid-template-columns:1fr!important}}
+    @media(max-width:580px){.fg,.rg,.ag{grid-template-columns:1fr!important}.nl{display:none!important}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="wrap nav">
-    <div class="logo">ava<span>FAC</span></div>
-    <nav class="nav-links">
-      <a href="#funciones">Funciones</a>
-      <a href="#rubros">Rubros</a>
-      <a href="#salon">Salón / Mesas</a>
-      <a href="#afip">AFIP</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contacto">Contacto</a>
+<header style="position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8edf3;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;height:66px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.45rem;font-weight:800;color:#0a2540;letter-spacing:-.5px;">ava<span style="color:#16a34a;">FAC</span></div>
+    <nav class="nl" style="display:flex;gap:28px;font-weight:500;font-size:.92rem;">
+      <a href="#funciones" style="color:#5c7a9a;" style-hover="color:#0a2540;">Funciones</a>
+      <a href="#rubros" style="color:#5c7a9a;" style-hover="color:#0a2540;">Rubros</a>
+      <a href="#salon" style="color:#5c7a9a;" style-hover="color:#0a2540;">Salón</a>
+      <a href="#afip" style="color:#5c7a9a;" style-hover="color:#0a2540;">AFIP</a>
+      <a href="#faq" style="color:#5c7a9a;" style-hover="color:#0a2540;">FAQ</a>
+      <a href="#contacto" style="color:#5c7a9a;" style-hover="color:#0a2540;">Contacto</a>
     </nav>
-    <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" class="btn">Pedir demo</a>
+    <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#16a34a;color:#fff;padding:10px 22px;border-radius:9px;font-weight:700;font-size:.9rem;flex-shrink:0;transition:all .2s;" style-hover="background:#15803d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(22,163,74,.3);">Pedir demo</a>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="badge"><span class="dot"></span> Facturación electrónica habilitada AFIP / ARCA</div>
-    <h1>El punto de venta que tu comercio o restaurante necesita</h1>
-    <p>avaFAC integra facturación electrónica, gestión de salón, stock y clientes en un solo sistema rápido, simple y pensado para el día a día del comercio argentino.</p>
-    <div class="cta">
-      <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" class="btn">Solicitar una demo gratis</a>
-      <a href="#funciones" class="btn btn-outline" style="color:#fff;border-color:#fff">Ver funciones</a>
+<section style="background:#0a2540;padding:90px 0 80px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="position:absolute;top:-160px;right:-80px;width:580px;height:580px;background:radial-gradient(circle,rgba(30,111,168,.22) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
+    <div class="hg" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div style="animation:fu .5s ease both;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(22,163,74,.12);border:1px solid rgba(22,163,74,.25);padding:6px 14px;border-radius:100px;margin-bottom:28px;">
+          <span style="width:7px;height:7px;background:#4ade80;border-radius:50%;animation:bl 2.5s ease infinite;flex-shrink:0;"></span>
+          <span style="font-size:12px;font-weight:600;color:#4ade80;">Facturación electrónica AFIP / ARCA habilitada</span>
+        </div>
+        <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px;">El punto de venta que tu comercio o restaurante necesita</h1>
+        <p style="font-size:1.1rem;color:#8eaac4;line-height:1.7;margin-bottom:36px;max-width:480px;">avaFAC integra facturación electrónica, gestión de salón, stock y clientes en un solo sistema rápido, simple y pensado para el día a día del comercio argentino.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#16a34a;color:#fff;padding:14px 28px;border-radius:10px;font-weight:700;font-size:.97rem;transition:all .2s;" style-hover="background:#15803d;transform:translateY(-2px);box-shadow:0 10px 28px rgba(22,163,74,.35);">Solicitar una demo gratis</a>
+          <a href="#funciones" style="display:inline-flex;align-items:center;background:rgba(255,255,255,.08);color:#c8daea;padding:14px 28px;border-radius:10px;font-weight:600;font-size:.97rem;border:1px solid rgba(255,255,255,.12);transition:all .2s;" style-hover="background:rgba(255,255,255,.13);color:#fff;">Ver funciones →</a>
+        </div>
+      </div>
+      <div class="hp" style="animation:fu .5s .15s ease both;opacity:0;animation-fill-mode:both;">
+        <div style="border-radius:18px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.07);">
+          <div style="background:#132d48;padding:12px 18px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,.05);">
+            <span style="width:11px;height:11px;background:#ff5f57;border-radius:50%;"></span>
+            <span style="width:11px;height:11px;background:#febc2e;border-radius:50%;"></span>
+            <span style="width:11px;height:11px;background:#28c840;border-radius:50%;"></span>
+            <span style="margin-left:12px;font-size:11px;color:#4a6a86;font-family:ui-monospace,monospace;">avaFAC — Venta Rápida</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1.25fr;">
+            <div style="background:#0d2c44;padding:20px;color:#d6e8f5;">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#60a5c4;margin-bottom:14px;">Ticket · Mesa 4</div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;"><span>2× Café con leche</span><span>$3.600</span></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;"><span>1× Medialunas</span><span>$2.400</span></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;"><span>2× Agua saborizada</span><span>$3.000</span></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:12px;"><span>1× Tostado J&amp;Q</span><span>$4.200</span></div>
+              <div style="display:flex;justify-content:space-between;padding:12px 0 10px;border-top:2px solid rgba(255,255,255,.12);margin-top:8px;font-weight:800;font-size:1.2rem;color:#fff;"><span>Total</span><span>$13.200</span></div>
+              <div style="background:#16a34a;color:#fff;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:12px;">Cobrar</div>
+            </div>
+            <div style="background:#f8fafc;padding:20px;">
+              <div style="display:flex;gap:5px;margin-bottom:12px;flex-wrap:wrap;">
+                <span style="background:#124b73;color:#fff;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;">Cafetería</span>
+                <span style="background:#e7f3ff;color:#124b73;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;">Bebidas</span>
+                <span style="background:#e7f3ff;color:#124b73;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;">Panadería</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:7px;padding:10px 4px;text-align:center;font-size:10px;font-weight:600;color:#0a2540;line-height:1.4;">Café<br><span style="font-weight:400;color:#64748b;">$1.800</span></div>
+                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:7px;padding:10px 4px;text-align:center;font-size:10px;font-weight:600;color:#0a2540;line-height:1.4;">Cortado<br><span style="font-weight:400;color:#64748b;">$1.700</span></div>
+                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:7px;padding:10px 4px;text-align:center;font-size:10px;font-weight:600;color:#0a2540;line-height:1.4;">Capuchino<br><span style="font-weight:400;color:#64748b;">$2.100</span></div>
+                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:7px;padding:10px 4px;text-align:center;font-size:10px;font-weight:600;color:#0a2540;line-height:1.4;">Té<br><span style="font-weight:400;color:#64748b;">$1.500</span></div>
+                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:7px;padding:10px 4px;text-align:center;font-size:10px;font-weight:600;color:#0a2540;line-height:1.4;">Submarino<br><span style="font-weight:400;color:#64748b;">$2.400</span></div>
+                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:7px;padding:10px 4px;text-align:center;font-size:10px;font-weight:600;color:#0a2540;line-height:1.4;">Medialuna<br><span style="font-weight:400;color:#64748b;">$800</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TIRA -->
-<div class="tira">
-  <div class="wrap">
-    <div class="item"><div class="num">A / B / C</div><div class="lbl">Comprobantes fiscales y no fiscales</div></div>
-    <div class="item"><div class="num">100%</div><div class="lbl">Integrado con AFIP / ARCA</div></div>
-    <div class="item"><div class="num">Multi-caja</div><div class="lbl">Trabajo en red con varias terminales</div></div>
-    <div class="item"><div class="num">Bar / Resto</div><div class="lbl">Modo gastronómico con mesas</div></div>
+<!-- TRUST -->
+<div style="background:#fff;border-bottom:1px solid #e8edf3;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:flex;flex-wrap:wrap;justify-content:center;">
+    <div style="flex:1;min-width:160px;display:flex;align-items:center;gap:12px;padding:20px 20px;border-right:1px solid #e8edf3;">
+      <div style="width:38px;height:38px;background:#eef3fa;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
+      <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;">Facturas A / B / C</div><div style="font-size:.78rem;color:#5c7a9a;">Fiscales y no fiscales</div></div>
+    </div>
+    <div style="flex:1;min-width:160px;display:flex;align-items:center;gap:12px;padding:20px 20px;border-right:1px solid #e8edf3;">
+      <div style="width:38px;height:38px;background:#eef3fa;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;">100% AFIP / ARCA</div><div style="font-size:.78rem;color:#5c7a9a;">CAE automático en línea</div></div>
+    </div>
+    <div style="flex:1;min-width:160px;display:flex;align-items:center;gap:12px;padding:20px 20px;border-right:1px solid #e8edf3;">
+      <div style="width:38px;height:38px;background:#eef3fa;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;">Multi-caja en red</div><div style="font-size:.78rem;color:#5c7a9a;">Varias terminales simultáneas</div></div>
+    </div>
+    <div style="flex:1;min-width:160px;display:flex;align-items:center;gap:12px;padding:20px 20px;">
+      <div style="width:38px;height:38px;background:#eef3fa;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+      <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;">Bar / Restó</div><div style="font-size:.78rem;color:#5c7a9a;">Modo gastronómico con mesas</div></div>
+    </div>
   </div>
 </div>
 
-<!-- FUNCIONES -->
-<section id="funciones">
-  <div class="wrap">
-    <div class="titulo">
-      <div class="k">Todo en un solo lugar</div>
-      <h2>Funciones que hacen la diferencia</h2>
-      <p>Desde la venta rápida en el mostrador hasta el control fiscal y de inventario, avaFAC cubre toda la operación.</p>
+<!-- FEATURES -->
+<section id="funciones" style="background:#f7f9fc;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:.75rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:10px;">Todo en un solo lugar</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:#0a2540;letter-spacing:-.5px;margin-bottom:12px;">Funciones que hacen la diferencia</h2>
+      <p style="font-size:1.02rem;color:#5c7a9a;max-width:540px;margin:0 auto;line-height:1.65;">Desde la venta rápida hasta el control fiscal y de inventario, avaFAC cubre toda la operación.</p>
     </div>
-    <div class="grid">
+    <div class="fg" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
 
-      <div class="card">
-        <div class="ico">🧾</div>
-        <h3>Facturación Electrónica AFIP</h3>
-        <p>Emisión de Facturas A, B y C con CAE en línea contra los web services de ARCA. Si la FE está deshabilitada, opera con comprobantes no fiscales.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Facturación Electrónica AFIP</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Facturas A, B y C con CAE en línea contra ARCA. Gestiona el ticket de acceso, el punto de venta y la numeración automáticamente. Opera con comprobantes no fiscales si la FE está deshabilitada.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">↩️</div>
-        <h3>Notas de Crédito</h3>
-        <p>Notas de crédito electrónicas y no fiscales asociadas a la factura original, con reversión automática de stock y registro del comprobante asociado.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="10 14 8 14 8 12"/><path d="M8 12h4a2 2 0 000-4H11"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Notas de Crédito</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">NC electrónicas y no fiscales asociadas a la factura original. Revierten el stock automáticamente y quedan vinculadas al comprobante de origen.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">💳</div>
-        <h3>Cuenta corriente y saldo a favor</h3>
-        <p>Manejo de saldo a favor por cliente reutilizable como medio de pago, con consulta de saldo y movimientos por cliente.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Cuenta corriente y saldo a favor</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">El saldo a favor de cada cliente se aplica directamente como medio de pago en el cobro. Consultá saldo e historial de movimientos por cliente.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">🧮</div>
-        <h3>División de cuenta y vuelto</h3>
-        <p>Dividí la cuenta en partes iguales entre los comensales con un solo comprobante y varios pagos, y calculá el vuelto en efectivo eligiendo los billetes con los que te pagan.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h20v12a2 2 0 01-2 2H4a2 2 0 01-2-2V8z"/><path d="M22 8l-2-4H4L2 8"/><circle cx="12" cy="14" r="2" fill="currentColor" stroke="none"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Caja y arqueo</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Apertura con fondo inicial, ingresos y egresos manuales, arqueo ciego por medio de pago con esperado vs. declarado, cierre (Z) imprimible e historial completo de sesiones.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">💰</div>
-        <h3>Caja y arqueo</h3>
-        <p>Abrí y cerrá caja por turno con fondo inicial, registrá ingresos y egresos y seguí el libro de caja con el saldo de efectivo en tiempo real. Arqueo por medio de pago (a ciegas o a la vista), cierre (Z) imprimible e historial de cada caja.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Venta rápida y vuelto</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Pantalla por departamentos con botones de producto. Varias ventas abiertas en paralelo. Calculá el vuelto seleccionando los billetes recibidos y cobrá con múltiples medios de pago.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">⚡</div>
-        <h3>Venta rápida</h3>
-        <p>Pantalla ágil por departamentos y botones de productos, con varias ventas abiertas en paralelo, pensada para el ritmo del mostrador.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.89 1.45l8 4A2 2 0 0122 7.24v9.53a2 2 0 01-1.11 1.79l-8 4a2 2 0 01-1.78 0l-8-4A2 2 0 012 16.76V7.24a2 2 0 011.11-1.79l8-4a2 2 0 011.78 0z"/><polyline points="2.32 6.16 12 11 21.68 6.16"/><line x1="12" y1="22.76" x2="12" y2="11"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Stock con kardex</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Trazabilidad de cada movimiento de inventario. El stock se reserva al instante al cargar un ítem. Concurrencia multiusuario robusta y ajuste manual de inventario.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">👆</div>
-        <h3>Modo táctil para tablets</h3>
-        <p>Operá la venta rápida desde una tablet con el dedo: botones grandes, teclado numérico en pantalla y un selector visual de productos por categoría. Sin teclado ni mouse.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Comandas a cocina y barra</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Impresión automática por sector según la categoría del artículo: cocina o bebidas. Reimpresión por ítem disponible para evitar errores en el servicio.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">📦</div>
-        <h3>Control de stock con kardex</h3>
-        <p>Trazabilidad completa de cada movimiento de stock, reserva inmediata en ventas simultáneas y alertas de stock mínimo.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Plano gráfico de salón</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Mesas con color por estado, arrastrables con memoria de posición. Múltiples salones, reserva y cliente por mesa desde el menú contextual. Un clic abre la mesa.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">👥</div>
-        <h3>Clientes y artículos</h3>
-        <p>Altas, búsqueda y administración de clientes, artículos, categorías, talonarios, medios de pago y operadoras de tarjetas.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">División de cuenta</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Dividí la cuenta en partes iguales: un solo comprobante y cada parte se cobra por separado con su propio medio de pago. Las mesas se mantienen abiertas entre cortes de luz.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">🍳</div>
-        <h3>Comandas a cocina y barra</h3>
-        <p>Ruteo e impresión de comandas por sector (cocina / bebidas) para coordinar el servicio en gastronomía.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Clientes, artículos y código de barras</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Gestión completa de clientes, artículos con lectura de código de barras, categorías, talonarios, medios de pago y operadoras de tarjetas.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">🗺️</div>
-        <h3>Plano de salón</h3>
-        <p>Visualizá tus mesas en un plano coloreado por estado, agregalas y ubicalas a tu gusto con memoria de posición, y organizá varios salones; un clic abre la mesa.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Usuarios y permisos</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Más de 25 permisos individuales por empleado. Auditoría completa de quién realiza cada venta y movimiento en el sistema.</p>
       </div>
 
-      <div class="card">
-        <div class="ico">📊</div>
-        <h3>Informes</h3>
-        <p>Reportes de ventas, comprobantes y cuenta corriente listos para imprimir, con datos claros para la toma de decisiones.</p>
-      </div>
-
-      <div class="card">
-        <div class="ico">🔐</div>
-        <h3>Usuarios y permisos</h3>
-        <p>Control de acceso por usuario con permisos granulares y auditoría de quién realiza cada operación.</p>
-      </div>
-
-      <div class="card">
-        <div class="ico">🖥️</div>
-        <h3>Una o varias cajas</h3>
-        <p>Funciona en una sola terminal o en red con varias cajas trabajando a la vez sobre la misma base de datos.</p>
-      </div>
-
-      <div class="card">
-        <div class="ico">💾</div>
-        <h3>Resguardo de datos</h3>
-        <p>Copias de seguridad y restauración de la base de datos integradas, para que tu información esté siempre protegida.</p>
-      </div>
-
-      <div class="card">
-        <div class="ico">🏓</div>
-        <h3>Reservas por nombre</h3>
-        <p>Ideal para canchas de pádel y salones: identificá cada mesa o cancha por nombre y reservala a nombre de un cliente.</p>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s,border-color .2s;" style-hover="transform:translateY(-3px);box-shadow:0 12px 32px rgba(18,75,115,.09);border-color:transparent;">
+        <div style="width:46px;height:46px;background:#eef3fa;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#0a2540;margin-bottom:6px;">Resguardo de datos</h3>
+        <p style="font-size:.88rem;color:#5c7a9a;line-height:1.6;">Backup y restauración de la base de datos integrados. Funciona en red con SQL Express (servidor/cliente) o en modo monousuario con LocalDB.</p>
       </div>
 
     </div>
@@ -284,175 +202,171 @@
 </section>
 
 <!-- RUBROS -->
-<section id="rubros" class="rubros">
-  <div class="wrap">
-    <div class="titulo">
-      <div class="k">Un sistema, muchos rubros</div>
-      <h2>Pensado para tu tipo de negocio</h2>
-      <p>avaFAC se adapta a comercios y servicios: activás el modo que necesitás y el sistema trabaja a la medida de tu negocio.</p>
+<section id="rubros" style="background:#fff;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:.75rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:10px;">Un sistema, muchos rubros</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:#0a2540;letter-spacing:-.5px;margin-bottom:12px;">Pensado para tu tipo de negocio</h2>
+      <p style="font-size:1.02rem;color:#5c7a9a;max-width:500px;margin:0 auto;line-height:1.65;">Activás el modo que necesitás y el sistema trabaja a la medida de tu negocio.</p>
     </div>
-    <div class="rubros-grid">
-      <div class="rubro"><div class="r-ico">🍽️</div><div><h4>Bares y restaurantes</h4><p>Mesas, plano de salón, comandas a cocina y división de cuenta.</p></div></div>
-      <div class="rubro"><div class="r-ico">🏪</div><div><h4>Kioscos y autoservicios</h4><p>Venta rápida por código de barras y cobro ágil en el mostrador.</p></div></div>
-      <div class="rubro"><div class="r-ico">🔧</div><div><h4>Ferreterías y comercios</h4><p>Miles de artículos, control de stock y cuenta corriente de clientes.</p></div></div>
-      <div class="rubro"><div class="r-ico">🏓</div><div><h4>Canchas de pádel</h4><p>Identificá cada cancha por nombre y reservala a nombre del cliente.</p></div></div>
-      <div class="rubro"><div class="r-ico">👕</div><div><h4>Indumentaria y librerías</h4><p>Categorías, rubros y precios claros para el retail de todos los días.</p></div></div>
-      <div class="rubro"><div class="r-ico">🧺</div><div><h4>Lavanderías y servicios</h4><p>Órdenes de trabajo por ítem y seguimiento del comprobante.</p></div></div>
+    <div class="rg" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+      <div style="background:#f7f9fc;border:1px solid #e4eaf2;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:all .2s;" style-hover="background:#fff;box-shadow:0 8px 24px rgba(18,75,115,.08);border-color:transparent;transform:translateY(-2px);">
+        <div style="width:44px;height:44px;background:#fff;border:1px solid #e4eaf2;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <div><h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:.97rem;font-weight:700;color:#0a2540;margin-bottom:4px;">Bares y restaurantes</h4><p style="font-size:.85rem;color:#5c7a9a;line-height:1.5;">Mesas, plano de salón, comandas a cocina y división de cuenta.</p></div>
+      </div>
+
+      <div style="background:#f7f9fc;border:1px solid #e4eaf2;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:all .2s;" style-hover="background:#fff;box-shadow:0 8px 24px rgba(18,75,115,.08);border-color:transparent;transform:translateY(-2px);">
+        <div style="width:44px;height:44px;background:#fff;border:1px solid #e4eaf2;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div><h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:.97rem;font-weight:700;color:#0a2540;margin-bottom:4px;">Kioscos y autoservicios</h4><p style="font-size:.85rem;color:#5c7a9a;line-height:1.5;">Venta rápida por código de barras y cobro ágil en el mostrador.</p></div>
+      </div>
+
+      <div style="background:#f7f9fc;border:1px solid #e4eaf2;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:all .2s;" style-hover="background:#fff;box-shadow:0 8px 24px rgba(18,75,115,.08);border-color:transparent;transform:translateY(-2px);">
+        <div style="width:44px;height:44px;background:#fff;border:1px solid #e4eaf2;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div><h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:.97rem;font-weight:700;color:#0a2540;margin-bottom:4px;">Ferreterías y comercios</h4><p style="font-size:.85rem;color:#5c7a9a;line-height:1.5;">Miles de artículos, control de stock y cuenta corriente de clientes.</p></div>
+      </div>
+
+      <div style="background:#f7f9fc;border:1px solid #e4eaf2;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:all .2s;" style-hover="background:#fff;box-shadow:0 8px 24px rgba(18,75,115,.08);border-color:transparent;transform:translateY(-2px);">
+        <div style="width:44px;height:44px;background:#fff;border:1px solid #e4eaf2;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:.97rem;font-weight:700;color:#0a2540;margin-bottom:4px;">Canchas de pádel</h4><p style="font-size:.85rem;color:#5c7a9a;line-height:1.5;">Identificá cada cancha por nombre y asignale un cliente desde el plano.</p></div>
+      </div>
+
+      <div style="background:#f7f9fc;border:1px solid #e4eaf2;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:all .2s;" style-hover="background:#fff;box-shadow:0 8px 24px rgba(18,75,115,.08);border-color:transparent;transform:translateY(-2px);">
+        <div style="width:44px;height:44px;background:#fff;border:1px solid #e4eaf2;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7" stroke-width="2.5"/></svg></div>
+        <div><h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:.97rem;font-weight:700;color:#0a2540;margin-bottom:4px;">Indumentaria y librerías</h4><p style="font-size:.85rem;color:#5c7a9a;line-height:1.5;">Categorías, rubros y precios claros para el retail de todos los días.</p></div>
+      </div>
+
+      <div style="background:#f7f9fc;border:1px solid #e4eaf2;border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:all .2s;" style-hover="background:#fff;box-shadow:0 8px 24px rgba(18,75,115,.08);border-color:transparent;transform:translateY(-2px);">
+        <div style="width:44px;height:44px;background:#fff;border:1px solid #e4eaf2;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#124b73;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></div>
+        <div><h4 style="font-family:'Bricolage Grotesque',sans-serif;font-size:.97rem;font-weight:700;color:#0a2540;margin-bottom:4px;">Lavanderías y servicios</h4><p style="font-size:.85rem;color:#5c7a9a;line-height:1.5;">Módulo de órdenes de lavandería con hasta 8 ítems por orden.</p></div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- MOCKUP POS -->
-<section id="pantallas">
-  <div class="wrap">
-    <div class="titulo">
-      <div class="k">Así se ve</div>
-      <h2>La venta rápida, en una sola pantalla</h2>
-      <p>Los botones de productos por departamento a un lado y el ticket con el total siempre a la vista. Cobrás en dos toques.</p>
-    </div>
-    <div class="pos">
-      <div class="pos-ticket">
-        <h5>Ticket · Mesa 4</h5>
-        <div class="pos-line"><span>2 · Café con leche</span><span>$3.600</span></div>
-        <div class="pos-line"><span>1 · Medialunas <small>x3</small></span><span>$2.400</span></div>
-        <div class="pos-line"><span>2 · Agua saborizada</span><span>$3.000</span></div>
-        <div class="pos-line"><span>1 · Tostado J&amp;Q</span><span>$4.200</span></div>
-        <div class="pos-total"><span>Total</span><span>$13.200</span></div>
-        <div class="pos-pay">💳 Cobrar</div>
+<!-- SALON -->
+<section id="salon" style="background:#f7f9fc;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
+    <div class="sg" style="display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <div style="font-size:.75rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:10px;">Modo Bar / Restó</div>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.8rem,3vw,2.3rem);font-weight:800;color:#0a2540;letter-spacing:-.5px;margin-bottom:14px;">Gestión visual del salón</h2>
+        <p style="font-size:1.02rem;color:#5c7a9a;line-height:1.65;margin-bottom:24px;">Abrí tu salón una sola vez y trabajá con un golpe de vista. Cada mesa muestra su estado al instante.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;gap:11px;align-items:flex-start;"><div style="width:20px;height:20px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><p style="font-size:.92rem;color:#334155;line-height:1.55;"><strong style="color:#0a2540;">Plano visual:</strong> mesas arrastrables con memoria de posición y múltiples salones.</p></div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><div style="width:20px;height:20px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><p style="font-size:.92rem;color:#334155;line-height:1.55;"><strong style="color:#0a2540;">Estado por color:</strong> verde libre, rojo ocupada, naranja reservada.</p></div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><div style="width:20px;height:20px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><p style="font-size:.92rem;color:#334155;line-height:1.55;"><strong style="color:#0a2540;">Salón persistente:</strong> las mesas abiertas sobreviven cortes de luz y reinicios.</p></div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><div style="width:20px;height:20px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><p style="font-size:.92rem;color:#334155;line-height:1.55;"><strong style="color:#0a2540;">Reserva y cliente por mesa:</strong> asociá un cliente y marcá la mesa sin cargar productos.</p></div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><div style="width:20px;height:20px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><p style="font-size:.92rem;color:#334155;line-height:1.55;"><strong style="color:#0a2540;">Mesas abiertas en paralelo</strong> con su consumo guardado automáticamente.</p></div>
+        </div>
       </div>
-      <div class="pos-pad">
-        <div class="pos-dept"><span class="on">Cafetería</span><span>Bebidas</span><span>Panadería</span><span>Sándwiches</span></div>
-        <div class="pos-btns">
-          <b>Café<br>$1.800</b><b>Cortado<br>$1.700</b><b>Capuchino<br>$2.100</b>
-          <b>Té<br>$1.500</b><b>Submarino<br>$2.400</b><b>Licuado<br>$3.200</b>
-          <b>Medialuna<br>$800</b><b>Tostado<br>$4.200</b><b>Factura<br>$900</b>
+      <div style="background:#fff;border:1px solid #e4eaf2;border-radius:18px;padding:26px;box-shadow:0 16px 48px rgba(18,75,115,.10);">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:.88rem;font-weight:700;color:#0a2540;text-align:center;margin-bottom:18px;">Tu salón de un vistazo</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+          <div style="background:#16a34a;border-radius:11px;padding:16px 8px;text-align:center;color:#fff;font-weight:700;font-size:.85rem;line-height:1.3;">Mesa 1<span style="display:block;font-weight:500;opacity:.85;font-size:.7rem;margin-top:4px;">Libre</span></div>
+          <div style="background:#dc2626;border-radius:11px;padding:16px 8px;text-align:center;color:#fff;font-weight:700;font-size:.85rem;line-height:1.3;">Mesa 2<span style="display:block;font-weight:500;opacity:.85;font-size:.7rem;margin-top:4px;">Ocupada</span></div>
+          <div style="background:#16a34a;border-radius:11px;padding:16px 8px;text-align:center;color:#fff;font-weight:700;font-size:.85rem;line-height:1.3;">Mesa 3<span style="display:block;font-weight:500;opacity:.85;font-size:.7rem;margin-top:4px;">Libre</span></div>
+          <div style="background:#ea7317;border-radius:11px;padding:16px 8px;text-align:center;color:#fff;font-weight:700;font-size:.85rem;line-height:1.3;">Mesa 4<span style="display:block;font-weight:500;opacity:.85;font-size:.7rem;margin-top:4px;">Reservada</span></div>
+          <div style="background:#dc2626;border-radius:11px;padding:16px 8px;text-align:center;color:#fff;font-weight:700;font-size:.85rem;line-height:1.3;">Barra<span style="display:block;font-weight:500;opacity:.85;font-size:.7rem;margin-top:4px;">Ocupada</span></div>
+          <div style="background:#16a34a;border-radius:11px;padding:16px 8px;text-align:center;color:#fff;font-weight:700;font-size:.85rem;line-height:1.3;">Cancha 1<span style="display:block;font-weight:500;opacity:.85;font-size:.7rem;margin-top:4px;">Libre</span></div>
+        </div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap;">
+          <span style="display:flex;align-items:center;gap:6px;font-size:.76rem;color:#5c7a9a;"><span style="width:11px;height:11px;background:#16a34a;border-radius:3px;display:inline-block;"></span>Libre</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:.76rem;color:#5c7a9a;"><span style="width:11px;height:11px;background:#dc2626;border-radius:3px;display:inline-block;"></span>Ocupada</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:.76rem;color:#5c7a9a;"><span style="width:11px;height:11px;background:#ea7317;border-radius:3px;display:inline-block;"></span>Reservada</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SALÓN / MESAS -->
-<section id="salon" class="salon">
-  <div class="wrap salon-flex">
-    <div>
-      <div class="k" style="color:var(--acento);font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:.85rem">Modo Bar / Restó</div>
-      <h2 style="font-size:2.1rem;color:var(--azul);font-weight:800;margin:8px 0 6px;letter-spacing:-.5px">Gestión visual del salón</h2>
-      <p style="color:var(--txt2);font-size:1.05rem">Abrí tu salón una sola vez y trabajá con un golpe de vista. Cada mesa muestra su estado al instante.</p>
-      <ul>
-        <li><strong>Salón fijo:</strong> definí tus mesas con el nombre que quieras y quedan siempre abiertas.</li>
-        <li><strong>Diseñá tu plano:</strong> agregá mesas nuevas directamente sobre el plano y arrastralas a la posición exacta de tu local.</li>
-        <li><strong>Estado por color:</strong> verde libre, rojo ocupada, naranja reservada.</li>
-        <li><strong>Reserva a mano:</strong> marcá una mesa como reservada sin necesidad de cargar productos.</li>
-        <li><strong>Cliente por mesa:</strong> asociá un cliente a la mesa y recuperalo al reabrirla.</li>
-        <li><strong>Varias mesas abiertas</strong> en simultáneo, con su consumo guardado automáticamente.</li>
-      </ul>
-    </div>
-    <div class="mesas">
-      <h4>Tu salón de un vistazo</h4>
-      <div class="mesas-grid">
-        <div class="mesa libre">Mesa 1<small>Libre</small></div>
-        <div class="mesa ocupada">Mesa 2<small>Ocupada</small></div>
-        <div class="mesa libre">Mesa 3<small>Libre</small></div>
-        <div class="mesa reservada">Mesa 4<small>Reservada</small></div>
-        <div class="mesa ocupada">Barra<small>Ocupada</small></div>
-        <div class="mesa libre">Cancha 1<small>Libre</small></div>
-      </div>
-      <div class="leyenda">
-        <span><i style="background:#3cb371"></i>Libre</span>
-        <span><i style="background:#cd5c5c"></i>Ocupada</span>
-        <span><i style="background:#e8890c"></i>Reservada</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- AFIP -->
-<section id="afip" class="afip">
-  <div class="wrap">
-    <div class="titulo">
-      <div class="k" style="color:#7dd3fc">Cumplí sin complicarte</div>
-      <h2>Facturación electrónica de verdad</h2>
-      <p>avaFAC se conecta directamente con los servicios de ARCA (ex AFIP) y gestiona el ticket de acceso, el punto de venta y la numeración por vos. Vos vendés, el sistema factura.</p>
+<section id="afip" style="background:#0a2540;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:.75rem;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:10px;">Cumplí sin complicarte</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:12px;">Facturación electrónica de verdad</h2>
+      <p style="font-size:1.02rem;color:#7fa8c4;max-width:540px;margin:0 auto;line-height:1.65;">avaFAC se conecta directamente con ARCA (ex AFIP) y gestiona el ticket de acceso, el punto de venta y la numeración por vos. Vos vendés, el sistema factura.</p>
     </div>
-    <div class="grid" style="grid-template-columns:repeat(2,1fr);max-width:760px;margin:0 auto">
-      <div class="card" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:#eaf4fb">
-        <div class="ico" style="background:rgba(255,255,255,.12)">✅</div>
-        <h3 style="color:#fff">CAE automático</h3>
-        <p style="color:#d6e6f2">Cada comprobante obtiene su CAE en línea, con renovación automática del ticket de acceso.</p>
+    <div class="ag" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:800px;margin:0 auto;">
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:26px;transition:all .2s;" style-hover="background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18);">
+        <div style="width:46px;height:46px;background:rgba(255,255,255,.10);border-radius:11px;display:flex;align-items:center;justify-content:center;color:#7dd3fc;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px;">CAE automático</h3>
+        <p style="font-size:.88rem;color:#7fa8c4;line-height:1.6;">Cada comprobante obtiene su CAE en línea, con renovación automática del ticket de acceso. Sin intervención manual.</p>
       </div>
-      <div class="card" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:#eaf4fb">
-        <div class="ico" style="background:rgba(255,255,255,.12)">🧮</div>
-        <h3 style="color:#fff">Condición de IVA del receptor</h3>
-        <p style="color:#d6e6f2">Informa la condición de IVA del cliente según la normativa vigente de ARCA.</p>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:26px;transition:all .2s;" style-hover="background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18);">
+        <div style="width:46px;height:46px;background:rgba(255,255,255,.10);border-radius:11px;display:flex;align-items:center;justify-content:center;color:#7dd3fc;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="11" x2="23" y2="11"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px;">Condición de IVA del receptor</h3>
+        <p style="font-size:.88rem;color:#7fa8c4;line-height:1.6;">Informa la condición de IVA del cliente según la normativa vigente de ARCA (RG actualizada).</p>
       </div>
-      <div class="card" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:#eaf4fb">
-        <div class="ico" style="background:rgba(255,255,255,.12)">📑</div>
-        <h3 style="color:#fff">Talonarios fiscales y no fiscales</h3>
-        <p style="color:#d6e6f2">Configurá talonarios por tipo de comprobante y trabajá con o sin facturación electrónica.</p>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:26px;transition:all .2s;" style-hover="background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18);">
+        <div style="width:46px;height:46px;background:rgba(255,255,255,.10);border-radius:11px;display:flex;align-items:center;justify-content:center;color:#7dd3fc;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px;">Talonarios fiscales y no fiscales</h3>
+        <p style="font-size:.88rem;color:#7fa8c4;line-height:1.6;">Configurá talonarios por tipo de comprobante. Funciona con o sin habilitación de factura electrónica.</p>
       </div>
-      <div class="card" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:#eaf4fb">
-        <div class="ico" style="background:rgba(255,255,255,.12)">🔍</div>
-        <h3 style="color:#fff">Consolidación con ARCA</h3>
-        <p style="color:#d6e6f2">Cotejá tus comprobantes locales contra los registrados en ARCA para detectar diferencias y mantener todo conciliado.</p>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:26px;transition:all .2s;" style-hover="background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18);">
+        <div style="width:46px;height:46px;background:rgba(255,255,255,.10);border-radius:11px;display:flex;align-items:center;justify-content:center;color:#7dd3fc;margin-bottom:16px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px;">Consolidación con ARCA</h3>
+        <p style="font-size:.88rem;color:#7fa8c4;line-height:1.6;">Cotejá tus comprobantes locales contra los registrados en ARCA para detectar diferencias y mantener todo conciliado.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="rubros">
-  <div class="wrap">
-    <div class="titulo">
-      <div class="k">Preguntas frecuentes</div>
-      <h2>Lo que más nos consultan</h2>
+<section id="faq" style="background:#f7f9fc;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="font-size:.75rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:10px;">Preguntas frecuentes</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:#0a2540;letter-spacing:-.5px;">Lo que más nos consultan</h2>
     </div>
-    <div class="faq-list">
-      <details open>
-        <summary>¿Está integrado con AFIP / ARCA?</summary>
-        <p>Sí. avaFAC emite facturas A, B y C con CAE en línea contra los web services de ARCA (ex AFIP), y gestiona el ticket de acceso, el punto de venta y la numeración por vos. Si todavía no facturás electrónicamente, podés trabajar con comprobantes no fiscales.</p>
+    <div style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px;">
+      <details open="" style="background:#fff;border:1px solid #e4eaf2;border-radius:13px;overflow:hidden;">
+        <summary style="padding:18px 22px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:#0a2540;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px;">¿Está integrado con AFIP / ARCA?<span style="color:#16a34a;font-size:1.3rem;font-weight:300;flex-shrink:0;line-height:1;">+</span></summary>
+        <div style="padding:0 22px 18px;font-size:.9rem;color:#5c7a9a;line-height:1.65;">Sí. avaFAC emite facturas A, B y C con CAE en línea contra los web services de ARCA (ex AFIP). Gestiona el ticket de acceso, el punto de venta y la numeración por vos. Si todavía no facturás electrónicamente, podés trabajar con comprobantes no fiscales.</div>
       </details>
-      <details>
-        <summary>¿Sirve para mi rubro?</summary>
-        <p>avaFAC es multi-rubro: gastronomía (bares y restaurantes), kioscos, autoservicios, ferreterías, indumentaria, librerías, canchas de pádel, lavanderías y más. Activás el modo que necesitás y el sistema se comporta a la medida de tu negocio.</p>
+      <details style="background:#fff;border:1px solid #e4eaf2;border-radius:13px;overflow:hidden;">
+        <summary style="padding:18px 22px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:#0a2540;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px;">¿Sirve para mi rubro?<span style="color:#16a34a;font-size:1.3rem;font-weight:300;flex-shrink:0;line-height:1;">+</span></summary>
+        <div style="padding:0 22px 18px;font-size:.9rem;color:#5c7a9a;line-height:1.65;">avaFAC es multi-rubro: gastronomía (bares y restaurantes), kioscos, autoservicios, ferreterías, indumentaria, librerías, canchas de pádel, lavanderías y más. Activás el modo que necesitás y el sistema se comporta a la medida de tu negocio.</div>
       </details>
-      <details>
-        <summary>¿Funciona en red con varias cajas?</summary>
-        <p>Sí. Podés trabajar en una sola terminal o en red con varias cajas operando a la vez sobre la misma base de datos, cada una con su turno de caja y su arqueo.</p>
+      <details style="background:#fff;border:1px solid #e4eaf2;border-radius:13px;overflow:hidden;">
+        <summary style="padding:18px 22px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:#0a2540;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px;">¿Funciona en red con varias cajas?<span style="color:#16a34a;font-size:1.3rem;font-weight:300;flex-shrink:0;line-height:1;">+</span></summary>
+        <div style="padding:0 22px 18px;font-size:.9rem;color:#5c7a9a;line-height:1.65;">Sí. Podés trabajar en una sola terminal o en red con varias cajas operando a la vez sobre la misma base de datos SQL, cada una con su turno de caja y su arqueo independiente.</div>
       </details>
-      <details>
-        <summary>¿Necesito hardware especial?</summary>
-        <p>Funciona en una PC con Windows y es compatible con impresoras térmicas, lectores de código de barras y los periféricos habituales del punto de venta. También podés operar la venta rápida desde una tablet en modo táctil.</p>
+      <details style="background:#fff;border:1px solid #e4eaf2;border-radius:13px;overflow:hidden;">
+        <summary style="padding:18px 22px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:#0a2540;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px;">¿Necesito hardware especial?<span style="color:#16a34a;font-size:1.3rem;font-weight:300;flex-shrink:0;line-height:1;">+</span></summary>
+        <div style="padding:0 22px 18px;font-size:.9rem;color:#5c7a9a;line-height:1.65;">Funciona en PC con Windows. Compatible con impresoras térmicas, lectores de código de barras y los periféricos habituales del punto de venta. No requiere hardware propietario.</div>
       </details>
-      <details>
-        <summary>¿Puedo controlar el stock y los clientes?</summary>
-        <p>Sí. Incluye control de stock con kardex y trazabilidad de cada movimiento, cuenta corriente de clientes con saldo a favor, y reportes de ventas y comprobantes listos para imprimir.</p>
+      <details style="background:#fff;border:1px solid #e4eaf2;border-radius:13px;overflow:hidden;">
+        <summary style="padding:18px 22px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:#0a2540;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px;">¿Puedo controlar el stock y los clientes?<span style="color:#16a34a;font-size:1.3rem;font-weight:300;flex-shrink:0;line-height:1;">+</span></summary>
+        <div style="padding:0 22px 18px;font-size:.9rem;color:#5c7a9a;line-height:1.65;">Sí. Incluye control de stock con kardex completo, reserva inmediata al vender, cuenta corriente de clientes con saldo a favor, y reportes de ventas y comprobantes.</div>
       </details>
-      <details>
-        <summary>¿Cómo empiezo?</summary>
-        <p>Escribinos por WhatsApp y coordinamos una demo en tu propio negocio, sin compromiso. Te ayudamos a ponerlo en marcha.</p>
+      <details style="background:#fff;border:1px solid #e4eaf2;border-radius:13px;overflow:hidden;">
+        <summary style="padding:18px 22px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:#0a2540;font-size:.97rem;display:flex;justify-content:space-between;align-items:center;gap:16px;">¿Cómo empiezo?<span style="color:#16a34a;font-size:1.3rem;font-weight:300;flex-shrink:0;line-height:1;">+</span></summary>
+        <div style="padding:0 22px 18px;font-size:.9rem;color:#5c7a9a;line-height:1.65;">Escribinos por WhatsApp y coordinamos una demo en tu propio negocio, sin compromiso. Te ayudamos a ponerlo en marcha desde el primer día.</div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-final" id="contacto">
-  <div class="wrap">
-    <h2>¿Querés verlo funcionando?</h2>
-    <p>Te mostramos avaFAC en tu propio negocio y te ayudamos a ponerlo en marcha.</p>
-    <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" class="btn" style="font-size:1.05rem;padding:15px 38px">💬 Escribinos por WhatsApp</a>
-    <p style="margin-top:18px;font-size:1rem;color:var(--txt2)">o escribinos al <strong>+54 9 11 3424 4774</strong></p>
+<!-- CTA -->
+<section id="contacto" style="background:#fff;padding:88px 0;text-align:center;">
+  <div style="max-width:620px;margin:0 auto;padding:0 32px;">
+    <div style="font-size:.75rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:16px;">Empezá hoy</div>
+    <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;color:#0a2540;letter-spacing:-.5px;margin-bottom:14px;">¿Querés verlo funcionando?</h2>
+    <p style="font-size:1.08rem;color:#5c7a9a;line-height:1.65;margin-bottom:34px;">Te mostramos avaFAC en tu propio negocio y te ayudamos a ponerlo en marcha.</p>
+    <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#16a34a;color:#fff;padding:16px 36px;border-radius:12px;font-weight:700;font-size:1.02rem;transition:all .2s;" style-hover="background:#15803d;transform:translateY(-2px);box-shadow:0 12px 32px rgba(22,163,74,.35);">Escribinos por WhatsApp</a>
+    <p style="margin-top:18px;font-size:.92rem;color:#94a3b8;">o al <strong style="color:#5c7a9a;">+54 9 11 3424 4774</strong></p>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div class="logo">ava<span style="color:#4ade80">FAC</span></div>
-    <p>Sistema de facturación y punto de venta para comercios y gastronomía.</p>
-    <p style="margin-top:8px;opacity:.7">© 2026 avaFAC — Todos los derechos reservados.</p>
+<footer style="background:#07192c;padding:40px 0;text-align:center;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:9px;">ava<span style="color:#4ade80;">FAC</span></div>
+    <p style="font-size:.86rem;color:#4a6a86;">Sistema de facturación y punto de venta para comercios y gastronomía.</p>
+    <p style="margin-top:7px;font-size:.8rem;color:#2c4a62;">© 2026 avaFAC — Todos los derechos reservados.</p>
   </div>
 </footer>
-
 </body>
 </html>
