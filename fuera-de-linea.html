@@ -53,7 +53,7 @@
 <body>
   <div class="hero">
     <div class="icono">🌙</div>
-    <h1>No estamos recibiendo pedidos en este momento</h1>
+    <h1 id="titulo">No estamos recibiendo pedidos en este momento</h1>
     <p class="desc">Este local no está disponible para pedidos online ahora mismo. Volvé a intentar en unos minutos, o probá más tarde dentro de nuestro horario de atención.</p>
 
     <!-- Horario de atención: editable a mano por el comercio (placeholder genérico). -->
@@ -65,5 +65,27 @@
     <button id="reintentar" onclick="location.reload()">↻ Volver a intentar</button>
     <div class="pie">Powered by avaFAC</div>
   </div>
+
+  <script>
+    // Personaliza con el nombre de fantasía del comercio según el subdominio (ej.
+    // "afiche.avafac.com.ar" -> clave "afiche" en comercios.json). Si el subdominio no
+    // está en el mapa, o el fetch falla (ej. GitHub Pages caído), queda el texto genérico
+    // de arriba sin romper nada. comercios.json vive en la raíz de este mismo repo
+    // (GitHub Pages, avafac.com.ar) — la ruta es absoluta a propósito: esta página se
+    // sirve desde el Worker de fallback para *.avafac.com.ar, así que un fetch relativo
+    // volvería a pegarle al túnel caído del comercio en vez de a la landing.
+    (function () {
+      var subdominio = location.hostname.split('.')[0];
+      fetch('https://avafac.com.ar/comercios.json', { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (comercios) {
+          var datos = comercios && comercios[subdominio];
+          if (!datos || !datos.nombre) return;
+          document.getElementById('titulo').textContent =
+            datos.nombre + ' no está recibiendo pedidos en este momento';
+        })
+        .catch(function () { /* queda el texto genérico */ });
+    })();
+  </script>
 </body>
 </html>
