@@ -67,21 +67,36 @@
         "Carta por QR y pedidos de delivery",
         "Cobros con Mercado Pago"
       ],
-      "publisher": { "@id": "https://avafac.com.ar/#organizacion" }
+      "publisher": { "@id": "https://avafac.com.ar/#organizacion" },
+      "author": { "@id": "https://avafac.com.ar/#organizacion" }
     },
     {
-      "@type": "Organization",
+      "@type": ["Organization", "LocalBusiness"],
       "@id": "https://avafac.com.ar/#organizacion",
-      "name": "avaFAC",
+      "name": "Avanzar Sistemas",
       "url": "https://avafac.com.ar/",
       "logo": "https://avafac.com.ar/og-image.png",
-      "description": "Desarrollo, instalación y soporte de avaFAC, sistema de facturación electrónica y punto de venta para comercios y gastronomía.",
+      "image": "https://avafac.com.ar/og-image.png",
+      "description": "Avanzar Sistemas desarrolla, instala y da soporte a avaFAC, sistema de facturación electrónica y punto de venta para comercios y gastronomía.",
+      "telephone": "+54-9-11-3424-4774",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "19 de Marzo 533",
+        "addressLocality": "Zárate",
+        "addressRegion": "Provincia de Buenos Aires",
+        "postalCode": "2800",
+        "addressCountry": "AR"
+      },
       "areaServed": [
         { "@type": "City", "name": "Zárate" },
         { "@type": "City", "name": "Campana" },
         { "@type": "City", "name": "Lima" },
         { "@type": "Country", "name": "Argentina" }
       ],
+      "makesOffer": {
+        "@type": "Offer",
+        "itemOffered": { "@id": "https://avafac.com.ar/#software" }
+      },
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+54-9-11-3424-4774",
@@ -502,6 +517,7 @@
     <p style="font-size:1.08rem;color:#5c7a9a;line-height:1.65;margin-bottom:34px;">Te mostramos avaFAC en tu propio negocio y te ayudamos a ponerlo en marcha.</p>
     <a href="https://wa.me/5491134244774?text=Hola%2C%20quiero%20una%20demo%20de%20avaFAC" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#16a34a;color:#fff;padding:16px 36px;border-radius:12px;font-weight:700;font-size:1.02rem;transition:all .2s;" style-hover="background:#15803d;transform:translateY(-2px);box-shadow:0 12px 32px rgba(22,163,74,.35);">Escribinos por WhatsApp</a>
     <p style="margin-top:18px;font-size:.92rem;color:#94a3b8;">o al <strong style="color:#5c7a9a;">+54 9 11 3424 4774</strong></p>
+    <p style="margin-top:10px;font-size:.92rem;color:#94a3b8;">Estamos en <strong style="color:#5c7a9a;">19 de Marzo 533, Zárate</strong> — Provincia de Buenos Aires.<br>Instalación y soporte presencial en Zárate, Campana, Lima y zona.</p>
   </div>
 </section>
 
@@ -509,6 +525,7 @@
   <div style="max-width:1200px;margin:0 auto;padding:0 32px;">
     <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:9px;">ava<span style="color:#4ade80;">FAC</span></div>
     <p style="font-size:.86rem;color:#4a6a86;">Sistema de facturación y punto de venta para comercios y gastronomía.</p>
+    <p style="margin-top:12px;font-size:.86rem;color:#4a6a86;">Desarrollado por <strong style="color:#8eaac4;">Avanzar Sistemas</strong> — 19 de Marzo 533, Zárate, Provincia de Buenos Aires · <a href="tel:+5491134244774" style="color:#4a6a86;">+54 9 11 3424 4774</a></p>
     <p style="margin-top:7px;font-size:.8rem;color:#2c4a62;">© 2026 avaFAC — Todos los derechos reservados.</p>
   </div>
 </footer>
